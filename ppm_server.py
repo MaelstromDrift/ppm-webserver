@@ -6,8 +6,8 @@ from flask import Flask, jsonify, request
 #load Flask
 app = Flask(__name__)
 
-#Connect to our database
-engine = create_engine('mysql://root:maninthemiddle@localhost/ppm')
+#Enter information to connect to your database here.
+engine = create_engine('mysql://user:password@localhost/ppm')
 engine.echo = False
 
 #setup a session to query and insert into the DB 
