@@ -1,9 +1,15 @@
-
 CREATE TABLE IF NOT EXISTS ppm_follower (
   _id int(11) NOT NULL AUTO_INCREMENT,
   userId int(11) NOT NULL,
   processId int(11) NOT NULL,
-  PRIMARY KEY _id (_id)
+  PRIMARY KEY (_id)
+);
+
+CREATE TABLE IF NOT EXISTS ppm_completed_tasks (
+  _id int(11) NOT NULL AUTO_INCREMENT,
+  userId int(11) NOT NULL,
+  taskId int(11) NOT NULL,
+  PRIMARY KEY (_id)
 );
 
 CREATE TABLE IF NOT EXISTS ppm_process (
@@ -11,7 +17,7 @@ CREATE TABLE IF NOT EXISTS ppm_process (
   title varchar(50) NOT NULL,
   description varchar(500) NOT NULL,
   creatorId int(11) NOT NULL,
-  categoryId int(11) NOT NULL
+  categoryId int(11) NOT NULL,
   PRIMARY KEY (_id)
 );
 
@@ -68,3 +74,7 @@ ALTER TABLE ppm_task_review
 ALTER TABLE ppm_process_followed_tasks
   ADD CONSTRAINT ppm_followed_tasks_fk_1 FOREIGN KEY (processId) REFERENCES ppm_process(_id) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT ppm_followed_tasks_fk_2 FOREIGN KEY (taskId) REFERENCES ppm_task(_id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE ppm_completed_tasks
+  ADD CONSTRAINT ppm_completed_tasks_fk_1 FOREIGN KEY (userId) REFERENCES ppm_user(_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT ppm_completed_tasks_fk_2 FOREIGN KEY (taskId) REFERENCES ppm_task(_id) ON DELETE CASCADE ON UPDATE CASCADE;  
